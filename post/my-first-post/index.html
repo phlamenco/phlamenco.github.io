@@ -26,7 +26,7 @@
 <meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/my-first-post/" />
+<link rel="canonical" href="https://phlamenco.github.io/post/my-first-post/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,7 +41,7 @@
 <meta property="og:title" content="My First Post And A Guide To Build This Blog Site" />
 <meta property="og:description" content="Hello Hugo! 一 引 Hugo是最近看别的博客时发现的一个工具，粗略的看了下介绍，发现这个产品的设计思路非常清晰明确，新用户上手容易并且文档比较多。我尝试" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/my-first-post/" />
+<meta property="og:url" content="https://phlamenco.github.io/post/my-first-post/" />
 <meta property="article:published_time" content="2019-03-05T11:40:34&#43;08:00"/>
 <meta property="article:modified_time" content="2019-03-05T11:40:34&#43;08:00"/>
 
@@ -51,11 +51,11 @@
 
 <meta itemprop="datePublished" content="2019-03-05T11:40:34&#43;08:00" />
 <meta itemprop="dateModified" content="2019-03-05T11:40:34&#43;08:00" />
-<meta itemprop="wordCount" content="609">
+<meta itemprop="wordCount" content="804">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="博客,hugo,github," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="My First Post And A Guide To Build This Blog Site"/>
 <meta name="twitter:description" content="Hello Hugo! 一 引 Hugo是最近看别的博客时发现的一个工具，粗略的看了下介绍，发现这个产品的设计思路非常清晰明确，新用户上手容易并且文档比较多。我尝试"/>
@@ -125,7 +125,9 @@
 
       <div class="post-meta">
         <span class="post-time"> 2019-03-05 </span>
-        
+        <div class="post-category">
+            <a href="/categories/%E6%95%99%E7%A8%8B/"> 教程 </a>
+            </div>
         
       </div>
     </header>
@@ -140,6 +142,7 @@
 <li><a href="#一-引">一 引</a></li>
 <li><a href="#二-搭建本站">二 搭建本站</a></li>
 <li><a href="#三-主题和内容">三 主题和内容</a></li>
+<li><a href="#四-后记">四 后记</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -183,6 +186,12 @@
 
 <p>hugo提供渲染markdown和html的能力（好像也支持两种语法同时在同一个文件里使用），如果是简单的写作，我倾向于使用markdown，这里有一个简单的<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">语法介绍</a>。</p>
 
+<h2 id="四-后记">四 后记</h2>
+
+<p>使用git submodule能很方便的同时管理自己编写的内容文件和网页静态文件，通过deploy脚本，更能一键发布用户的新增内容。但是当用户的工作环境为分布式的时候，情况稍微有点复杂。</p>
+
+<p>在分布式的使用情景下，conflict不可避免，如何解决这些conflict需要更深入的git方面的知识，幸运的是网上相关解决方案也有很多，比如stackoverflow上的这个<a href="https://stackoverflow.com/questions/24743769/git-resolve-conflict-using-ours-theirs-for-all-files">问题的答案</a>可以用来参考</p>
+
 <p>希望本文能对大家有用，enjoy!</p>
 
     </div>
@@ -203,9 +212,17 @@
   
 </div>
 <footer class="post-footer">
-      
+      <div class="post-tags">
+          <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+          <a href="/tags/hugo/">hugo</a>
+          <a href="/tags/github/">github</a>
+          </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/good-blog-mark/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Good Blog Mark</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         
       </nav>
     </footer>
@@ -222,7 +239,7 @@
       <a href="#" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
       <a href="https://github.com/phlamenco" class="iconfont icon-github" title="github"></a>
       <a href="#" class="iconfont icon-bilibili" title="bilibili"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  <a href="https://phlamenco.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
