@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>阅读 on Phlamenco&#39;s Blog Site</title>
+    <link>https://phlamenco.github.io/categories/%E9%98%85%E8%AF%BB/</link>
+    <description>Recent content in 阅读 on Phlamenco&#39;s Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 06 Mar 2019 09:45:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://phlamenco.github.io/categories/%E9%98%85%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Good Blog Mark</title>
+      <link>https://phlamenco.github.io/post/good-blog-mark/</link>
+      <pubDate>Wed, 06 Mar 2019 09:45:50 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/good-blog-mark/</guid>
+      <description>技术 codedump 后台相关，源码阅读</description>
+    </item>
+    
+  </channel>
+</rss>
