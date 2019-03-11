@@ -3,6 +3,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://phlamenco.github.io/post/raft-extented-read-note/</loc>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://phlamenco.github.io/post/good-blog-mark/</loc>
     <lastmod>2019-03-06T09:45:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,14 +31,14 @@
   
   <url>
     <loc>https://phlamenco.github.io/</loc>
-    <lastmod>2019-03-06T09:45:50+08:00</lastmod>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://phlamenco.github.io/post/</loc>
-    <lastmod>2019-03-06T09:45:50+08:00</lastmod>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -52,6 +59,34 @@
   <url>
     <loc>https://phlamenco.github.io/tags/hugo/</loc>
     <lastmod>2019-03-05T11:40:34+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://phlamenco.github.io/tags/paper/</loc>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://phlamenco.github.io/categories/paper/</loc>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://phlamenco.github.io/tags/raft/</loc>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://phlamenco.github.io/tags/read-note/</loc>
+    <lastmod>2019-03-08T16:01:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>

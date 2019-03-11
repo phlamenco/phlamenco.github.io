@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Phlamenco&#39;s Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 06 Mar 2019 09:45:50 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2019 16:01:02 +0800</lastBuildDate>
     
 	<atom:link href="https://phlamenco.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raft Extented Read Note</title>
+      <link>https://phlamenco.github.io/post/raft-extented-read-note/</link>
+      <pubDate>Fri, 08 Mar 2019 16:01:02 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/raft-extented-read-note/</guid>
+      <description>本文用于记录阅读（raft-extented paper）时的一些想法和笔记。 1. 分布式系统一致性 在谈分布式一致性算法的时候，通常是在Repli</description>
+    </item>
     
     <item>
       <title>Good Blog Mark</title>
