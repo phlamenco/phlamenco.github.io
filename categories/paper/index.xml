@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>paper on Phlamenco&#39;s Blog Site</title>
+    <link>https://phlamenco.github.io/categories/paper/</link>
+    <description>Recent content in paper on Phlamenco&#39;s Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 Mar 2019 17:13:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://phlamenco.github.io/categories/paper/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>In Memory Url Compression</title>
+      <link>https://phlamenco.github.io/post/in-memory-url-compression/</link>
+      <pubDate>Fri, 15 Mar 2019 17:13:10 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/in-memory-url-compression/</guid>
+      <description>今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。 压缩原理 举一个例</description>
+    </item>
+    
+    <item>
+      <title>Raft Extented Read Note</title>
+      <link>https://phlamenco.github.io/post/raft-extented-read-note/</link>
+      <pubDate>Fri, 08 Mar 2019 16:01:02 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/raft-extented-read-note/</guid>
+      <description>本文用于记录阅读（raft-extented paper）时的一些想法和笔记。 1. 分布式系统一致性 在谈分布式一致性算法的时候，通常是在Repli</description>
+    </item>
+    
+  </channel>
+</rss>
