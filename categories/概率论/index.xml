@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>概率论 on Phlamenco&#39;s Blog Site</title>
+    <link>https://phlamenco.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/</link>
+    <description>Recent content in 概率论 on Phlamenco&#39;s Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 25 Mar 2019 09:20:11 +0800</lastBuildDate>
+    
+	<atom:link href="https://phlamenco.github.io/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A Game To Win</title>
+      <link>https://phlamenco.github.io/post/a-game-to-win/</link>
+      <pubDate>Mon, 25 Mar 2019 09:20:11 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/a-game-to-win/</guid>
+      <description>有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4</description>
+    </item>
+    
+  </channel>
+</rss>

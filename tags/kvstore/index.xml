@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kvstore on Phlamenco&#39;s Blog Site</title>
+    <link>https://phlamenco.github.io/tags/kvstore/</link>
+    <description>Recent content in kvstore on Phlamenco&#39;s Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 14 Mar 2019 09:27:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://phlamenco.github.io/tags/kvstore/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kvstore with raft</title>
+      <link>https://phlamenco.github.io/post/kvstore/</link>
+      <pubDate>Thu, 14 Mar 2019 09:27:43 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/kvstore/</guid>
+      <description>本文记录如何使用raft来构建一个分布式的kvstore。 一个简单而又典型的kvstore会提供了下面的接口 Get Put Delete 单机的简单实现 从最简单的开</description>
+    </item>
+    
+  </channel>
+</rss>
