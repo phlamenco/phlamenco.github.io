@@ -6,10 +6,19 @@
     <description>Recent content on Phlamenco&#39;s Blog Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 25 Mar 2019 09:20:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Apr 2019 09:36:04 +0800</lastBuildDate>
     
 	<atom:link href="https://phlamenco.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>multiply_algorithm</title>
+      <link>https://phlamenco.github.io/post/multiply-algorithm/</link>
+      <pubDate>Mon, 15 Apr 2019 09:36:04 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/multiply-algorithm/</guid>
+      <description>乘法是学习数学计算的基础，从小我们就从课本上学到了一种通用的乘法算法。但是那种乘法的复杂度太高。 下图是传统乘法和Karatsuba’s met</description>
+    </item>
     
     <item>
       <title>A Game To Win</title>
@@ -62,7 +71,7 @@
       <pubDate>Wed, 06 Mar 2019 09:45:50 +0800</pubDate>
       
       <guid>https://phlamenco.github.io/post/good-blog-mark/</guid>
-      <description>技术 codedump 后台相关，源码阅读</description>
+      <description>技术 codedump 后台相关，源码阅读 张吉的博客 大数据 subetter 数据结构与算法</description>
     </item>
     
     <item>
