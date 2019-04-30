@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>In Memory Url Compression - Phlamenco&#39;s Blog Site</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="phlamenco" /><meta name="description" content="今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。 压缩原理 举一个例" /><meta name="keywords" content="Hugo, theme, even, phlamenco, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://phlamenco.github.io/post/in-memory-url-compression/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="In Memory Url Compression" />
+<meta property="og:description" content="今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。 压缩原理 举一个例" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://phlamenco.github.io/post/in-memory-url-compression/" />
+<meta property="article:published_time" content="2019-03-15T17:13:10&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-15T17:13:10&#43;08:00"/>
+
+<meta itemprop="name" content="In Memory Url Compression">
+<meta itemprop="description" content="今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。 压缩原理 举一个例">
+
+
+<meta itemprop="datePublished" content="2019-03-15T17:13:10&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-15T17:13:10&#43;08:00" />
+<meta itemprop="wordCount" content="1801">
+
+
+
+<meta itemprop="keywords" content="compression,AVL树," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="In Memory Url Compression"/>
+<meta name="twitter:description" content="今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。 压缩原理 举一个例"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Get Schwifty</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Get Schwifty</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">In Memory Url Compression</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-15 </span>
+        <div class="post-category">
+            <a href="/categories/paper/"> paper </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#压缩原理">压缩原理</a></li>
+<li><a href="#avl树">AVL树</a></li>
+<li><a href="#实现">实现</a></li>
+<li><a href="#reference">reference</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>今天看到一篇论文，发明了一种基于url特点的in-memory的压缩方式，取得了50%的压缩效率同时实现了高效率的读取方法。</p>
+
+<h2 id="压缩原理">压缩原理</h2>
+
+<p>举一个例子，比如如下urls：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">1. http://www.sun.com/
+2. http://www.sgi.com/
+3. http://www.sun.com/news/
+4. http://www.sun.com/news/archive/</pre></td></tr></table>
+</div>
+</div>
+<p>可以看到urls至少具有http://这一共同的部分，如果要减少总的存储量，这部分是肯定需要想办法压缩掉的，另外可以看到一部分url是由另外一部分url衍生而来（在原来的基础上新增目录之类），这里也可以看成是这两部分url具有共同的部分，也是可以压缩掉。</p>
+
+<p>该论文根据url的这个特点，设计了一套基于AVL树的压缩方法。</p>
+
+<p>论文设计AVL树的节点结构如下：</p>
+
+
+<img src="/post/img/AVL_NODE.png" alt="AVL node structure" width="340"/>
+
+<ul>
+<li>RefId指向他的父节点</li>
+<li>CommonPrefix是它和root到其父节点路径上所有url的共同url部分的长度</li>
+<li>diffUrl是除了CommonPrefix之外的url的其它不同部分</li>
+<li>Lchild和Rchild分别指向自己的左右子节点</li>
+</ul>
+
+<p>对应上面例子中的urls，可以构建如下的AVL树：</p>
+
+
+<img src="/post/img/AVL_tree.png" alt="AVL tree example" width="340"/>
+
+<p>每一个Url指定一个refId，从0开始逐渐递增。</p>
+
+<p>构建的AVL数的root节点的RefId不一定会是0，不过diffUrl一定是全部的Url。新节点插入时使用diffUrl做字符串比较，以此找到最大的CommonPrefix的节点。新node的插入导致的AVL树的调整使得root节点发生转变时，root节点和替换它的子节点的内容会发生变化。</p>
+
+<p>从这样一个AVL树获取一个URL也很容易，依次从ROOT节点遍历到叶子节点，把diffUrl拼接起来就获取了完整的URL。</p>
+
+<h2 id="avl树">AVL树</h2>
+
+<p>AVL是一种平衡二叉树，读取性能很好，最坏时间复杂度为O(logN)，下面是其C语言的一种递归实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">// C program to insert a node in AVL tree 
+#include&lt;stdio.h&gt; 
+#include&lt;stdlib.h&gt; 
+
+// An AVL tree node 
+struct Node 
+{ 
+	int key; 
+	struct Node *left; 
+	struct Node *right; 
+	int height; 
+}; 
+
+// A utility function to get maximum of two integers 
+int max(int a, int b); 
+
+// A utility function to get the height of the tree 
+int height(struct Node *N) 
+{ 
+	if (N == NULL) 
+		return 0; 
+	return N-&gt;height; 
+} 
+
+// A utility function to get maximum of two integers 
+int max(int a, int b) 
+{ 
+	return (a &gt; b)? a : b; 
+} 
+
+/* Helper function that allocates a new node with the given key and 
+	NULL left and right pointers. */
+struct Node* newNode(int key) 
+{ 
+	struct Node* node = (struct Node*) 
+						malloc(sizeof(struct Node)); 
+	node-&gt;key = key; 
+	node-&gt;left = NULL; 
+	node-&gt;right = NULL; 
+	node-&gt;height = 1; // new node is initially added at leaf 
+	return(node); 
+} 
+
+// A utility function to right rotate subtree rooted with y 
+// See the diagram given above. 
+struct Node *rightRotate(struct Node *y) 
+{ 
+	struct Node *x = y-&gt;left; 
+	struct Node *T2 = x-&gt;right; 
+
+	// Perform rotation 
+	x-&gt;right = y; 
+	y-&gt;left = T2; 
+
+	// Update heights 
+	y-&gt;height = max(height(y-&gt;left), height(y-&gt;right))+1; 
+	x-&gt;height = max(height(x-&gt;left), height(x-&gt;right))+1; 
+
+	// Return new root 
+	return x; 
+} 
+
+// A utility function to left rotate subtree rooted with x 
+// See the diagram given above. 
+struct Node *leftRotate(struct Node *x) 
+{ 
+	struct Node *y = x-&gt;right; 
+	struct Node *T2 = y-&gt;left; 
+
+	// Perform rotation 
+	y-&gt;left = x; 
+	x-&gt;right = T2; 
+
+	// Update heights 
+	x-&gt;height = max(height(x-&gt;left), height(x-&gt;right))+1; 
+	y-&gt;height = max(height(y-&gt;left), height(y-&gt;right))+1; 
+
+	// Return new root 
+	return y; 
+} 
+
+// Get Balance factor of node N 
+int getBalance(struct Node *N) 
+{ 
+	if (N == NULL) 
+		return 0; 
+	return height(N-&gt;left) - height(N-&gt;right); 
+} 
+
+// Recursive function to insert a key in the subtree rooted 
+// with node and returns the new root of the subtree. 
+struct Node* insert(struct Node* node, int key) 
+{ 
+	/* 1. Perform the normal BST insertion */
+	if (node == NULL) 
+		return(newNode(key)); 
+
+	if (key &lt; node-&gt;key) 
+		node-&gt;left = insert(node-&gt;left, key); 
+	else if (key &gt; node-&gt;key) 
+		node-&gt;right = insert(node-&gt;right, key); 
+	else // Equal keys are not allowed in BST 
+		return node; 
+
+	/* 2. Update height of this ancestor node */
+	node-&gt;height = 1 + max(height(node-&gt;left), 
+						height(node-&gt;right)); 
+
+	/* 3. Get the balance factor of this ancestor 
+		node to check whether this node became 
+		unbalanced */
+	int balance = getBalance(node); 
+
+	// If this node becomes unbalanced, then 
+	// there are 4 cases 
+
+	// Left Left Case 
+	if (balance &gt; 1 &amp;&amp; key &lt; node-&gt;left-&gt;key) 
+		return rightRotate(node); 
+
+	// Right Right Case 
+	if (balance &lt; -1 &amp;&amp; key &gt; node-&gt;right-&gt;key) 
+		return leftRotate(node); 
+
+	// Left Right Case 
+	if (balance &gt; 1 &amp;&amp; key &gt; node-&gt;left-&gt;key) 
+	{ 
+		node-&gt;left = leftRotate(node-&gt;left); 
+		return rightRotate(node); 
+	} 
+
+	// Right Left Case 
+	if (balance &lt; -1 &amp;&amp; key &lt; node-&gt;right-&gt;key) 
+	{ 
+		node-&gt;right = rightRotate(node-&gt;right); 
+		return leftRotate(node); 
+	} 
+
+	/* return the (unchanged) node pointer */
+	return node; 
+} 
+
+// A utility function to print preorder traversal 
+// of the tree. 
+// The function also prints height of every node 
+void preOrder(struct Node *root) 
+{ 
+	if(root != NULL) 
+	{ 
+		printf(&#34;%d &#34;, root-&gt;key); 
+		preOrder(root-&gt;left); 
+		preOrder(root-&gt;right); 
+	} 
+} 
+
+/* Drier program to test above function*/
+int main() 
+{ 
+struct Node *root = NULL; 
+
+/* Constructing tree given in the above figure */
+root = insert(root, 10); 
+root = insert(root, 20); 
+root = insert(root, 30); 
+root = insert(root, 40); 
+root = insert(root, 50); 
+root = insert(root, 25); 
+
+/* The constructed AVL Tree would be 
+			30 
+		/ \ 
+		20 40 
+		/ \	 \ 
+	10 25 50 
+*/
+
+printf(&#34;Preorder traversal of the constructed AVL&#34;
+		&#34; tree is \n&#34;); 
+preOrder(root); 
+
+return 0; 
+} </pre></td></tr></table>
+</div>
+</div>
+<h2 id="实现">实现</h2>
+
+<p>论文里使用了三个数组作为数据结构来完成压缩数据的构建。分别如下所示：</p>
+
+
+<img src="/post/img/AVL_node_array.png" alt="AVL node array" width="340"/>
+
+
+<img src="/post/img/url_array.png" alt="compressed URL array" width="340"/>
+
+
+<img src="/post/img/ptr_array.png" alt="URL pointer array" width="110"/>
+
+<p>左上是AVL node的数组表示，该数组用于维护AVL数的结构；右上是压缩url的数组表示，该数组用于存储压缩的URL数据；左下是指针数组，用于访问右上的数组，如下图所示：</p>
+
+
+<img src="/post/img/ptr_visit.png" alt="URL pointer visit" width="340"/>
+
+<p>结构比较清晰。</p>
+
+<p>作者为什么要在这里使用三个数组来实现呢？一方面紧凑的内存结构设计能够减少不必要的内存开销（毕竟论文的目标是减少内存使用量），另一方面是希望编译器的优化能为数据的读取带来额外的好处(局部性原理，cache之类的优势)，最后AVL node的数组在完成URL的全量压缩后可以删除掉，进一步节省内存。</p>
+
+<p>最后论文给出了他们的一个实现的性能测试结果：</p>
+
+
+<img src="/post/img/url_access_pf.png" alt="access url performace" width="360"/>
+
+<h2 id="reference">reference</h2>
+
+<ol>
+<li><a href="https://pdfs.semanticscholar.org/9bf1/007a376705f312ba37e4ea75cc56196d0361.pdf">in memory url compression</a></li>
+<li><a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">AVL树</a></li>
+<li><a href="https://github.com/willemt/array-avl-tree">AVL的c实现</a></li>
+<li><a href="https://github.com/phlamenco/url_compress">论文的c++实现</a></li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">phlamenco</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-03-15
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/compression/">compression</a>
+          <a href="/tags/avl%E6%A0%91/">AVL树</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/a-game-to-win/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">A Game To Win</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/kvstore/">
+            <span class="next-text nav-default">Kvstore with raft</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="#" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/phlamenco" class="iconfont icon-github" title="github"></a>
+      <a href="#" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://phlamenco.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">phlamenco</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
