@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>A Game To Win - Phlamenco&#39;s Blog Site</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="phlamenco" /><meta name="description" content="有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4" /><meta name="keywords" content="Hugo, theme, even, phlamenco, blog" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.54.0 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://phlamenco.github.io/post/a-game-to-win/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="A Game To Win" />
+<meta property="og:description" content="有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://phlamenco.github.io/post/a-game-to-win/" />
+<meta property="article:published_time" content="2019-03-25T09:20:11&#43;08:00"/>
+<meta property="article:modified_time" content="2019-03-25T09:20:11&#43;08:00"/>
+
+<meta itemprop="name" content="A Game To Win">
+<meta itemprop="description" content="有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4">
+
+
+<meta itemprop="datePublished" content="2019-03-25T09:20:11&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-25T09:20:11&#43;08:00" />
+<meta itemprop="wordCount" content="1146">
+
+
+
+<meta itemprop="keywords" content="游戏,期望," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Game To Win"/>
+<meta name="twitter:description" content="有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Get Schwifty</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Get Schwifty</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">A Game To Win</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-25 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%A6%82%E7%8E%87%E8%AE%BA/"> 概率论 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#误解">误解</a></li>
+<li><a href="#正解">正解</a></li>
+<li><a href="#思考">思考</a></li>
+<li><a href="#测试">测试</a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>有这样的一个游戏：假设有三个骰子，六个面印着特别的数字，A是（3,3,3,3,3,3）；B是（6,5,2,2,2,2）；C是（4,4,4,4,1,1）。两人依次选取一个骰子，然后投掷比较骰子点数来判断输赢，谁的点数更大谁就算赢。让你先选，你会选哪个骰子？</p>
+
+<h2 id="误解">误解</h2>
+
+<p>假设X是投掷的点数，E(X)是点数的期望，那么骰子A,B,C三者的点数期望分别是：</p>
+
+<p>Ea(X) = 3 * <sup>1</sup>&frasl;<sub>6</sub> + 3 * <sup>1</sup>&frasl;<sub>6</sub> + 3 * <sup>1</sup>&frasl;<sub>6</sub> + 3 * <sup>1</sup>&frasl;<sub>6</sub> + 3 * <sup>1</sup>&frasl;<sub>6</sub> + 3 * <sup>1</sup>&frasl;<sub>6</sub> = 3</p>
+
+<p>Eb(X) = 6 * <sup>1</sup>&frasl;<sub>6</sub> + 5 * <sup>1</sup>&frasl;<sub>6</sub> + 2 * <sup>1</sup>&frasl;<sub>6</sub> + 2 * <sup>1</sup>&frasl;<sub>6</sub> + 2 * <sup>1</sup>&frasl;<sub>6</sub> + 2 * <sup>1</sup>&frasl;<sub>6</sub> = <sup>19</sup>&frasl;<sub>6</sub></p>
+
+<p>Ec(X) = 4 * <sup>1</sup>&frasl;<sub>6</sub> + 4 * <sup>1</sup>&frasl;<sub>6</sub> + 4 * <sup>1</sup>&frasl;<sub>6</sub> + 4 * <sup>1</sup>&frasl;<sub>6</sub> + 1 * <sup>1</sup>&frasl;<sub>6</sub> + 1 * <sup>1</sup>&frasl;<sub>6</sub> = 3</p>
+
+<p>可以知道B骰子的点数期望要比其他两个都高一点，那么选择B骰子赢面会更大。</p>
+
+<p>其实这样判断是错误的。</p>
+
+<h2 id="正解">正解</h2>
+
+<p>假设对比骰子A和B，其点数的联合概率分布表如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">AB联合分布</th>
+<th>3</th>
+<th>3</th>
+<th>3</th>
+<th>3</th>
+<th>3</th>
+<th>3</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+
+<p>图中把A点数大于B点数的情况标记出来了，根据该表可以知道A点数大于B点数的概率为 <sup>2</sup>&frasl;<sub>3</sub> 。</p>
+
+<p>对比骰子B和C，其点数的联合概率分布表如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">BC联合分布</th>
+<th>6</th>
+<th>5</th>
+<th>2</th>
+<th>2</th>
+<th>2</th>
+<th>2</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">4</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+
+<tr>
+<td align="center">1</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+
+<p>可以知道B点数大于C点数的概率为 <sup>5</sup>&frasl;<sub>9</sub> 。</p>
+
+<p>对比骰子C和A，其点数的联合概率分布表如下：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">CA联合分布</th>
+<th>4</th>
+<th>4</th>
+<th>4</th>
+<th>4</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>可以知道C点数大于A点数的概率为 <sup>2</sup>&frasl;<sub>3</sub> 。</p>
+
+<h2 id="思考">思考</h2>
+
+<p>误解的思路乍看起来似乎也是很有说服力，但是我们可以仔细思考一下这里的求解目标。假设只考虑骰子A和B，设事件X为A的投掷点数，时间Y为B的投掷点数，事件Z为B与A点数的差值，那么有</p>
+
+<p>P(z) = P(b - a)</p>
+
+<p>由于A和B相互独立，所以有</p>
+
+<p>E(Z) = E(B-A) = E(B) - E(A) = <sup>1</sup>&frasl;<sub>6</sub> 其差值的期望为 <sup>1</sup>&frasl;<sub>6</sub> ，为正值。</p>
+
+<p>但仔细查看问题，发现我们求解的目标应该是E(Z&gt;0)，也就是目标的所有数据集合应该是所有z&gt;0或者z=0或者z&lt;0的情况（类似边缘分布），而不是z的单个不同取值的情况。</p>
+
+<h2 id="测试">测试</h2>
+
+<p>根据大数定律（事件发生的理论期望值可以通过足够多次数的重试求得的平均值来逼近），这里来写一个程序验证一下。以骰子A和B为例，假设A点数比B点数大时得分为1，其他情况得分为0，这个得分事件记为X，那么得分的期望是</p>
+
+<p>E(X) = 1 * P(A &gt; B) + 0 * P(A ≤ B)</p>
+
+<p>所以P(A &gt; B) = E(X)</p>
+
+<p>代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># /usr/bin/python
+
+import random
+import sys
+
+dice_a = [3, 3, 3, 3, 3, 3]
+dice_b = [6, 5, 2, 2, 2, 2]
+
+def toggle_dice(dice):
+    return dice[random.randint(0, len(dice) - 1)]
+
+def round_one():
+    res_a = toggle_dice(dice_a)
+    res_b = toggle_dice(dice_b)
+    return 1 if (res_a &gt; res_b) else 0
+
+def repeate_toggle(count):
+    total_count = float(count)
+    win_count = 0
+    while count &gt; 0 :
+        win_count += round_one()
+        count -= 1
+    return win_count / total_count
+
+if __name__ == &#39;__main__&#39;:
+    print repeate_toggle(int(sys.argv[1]))</pre></td></tr></table>
+</div>
+</div>
+<p>执行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">$ python get_expectation.py 10000
+0.6613
+$ python get_expectation.py 100000
+0.66717
+$ python get_expectation.py 1000000
+0.666349
+$ python get_expectation.py 10000000
+0.666584</pre></td></tr></table>
+</div>
+</div>
+<p>可以看到随着重复的次数的增多，期望逐渐趋向于 <sup>2</sup>&frasl;<sub>3</sub> ，和之前的理论值一致。</p>
+
+<h2 id="总结">总结</h2>
+
+<p>对于这样一个掷骰子的游戏，靠后选择骰子的人总能有办法使自己处于游戏的有利地位，是自己成为常胜将军。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">phlamenco</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-03-25
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat-qr-code.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a>
+          <a href="/tags/%E6%9C%9F%E6%9C%9B/">期望</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/multiply-algorithm/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">multiply_algorithm</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/in-memory-url-compression/">
+            <span class="next-text nav-default">In Memory Url Compression</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="#" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://github.com/phlamenco" class="iconfont icon-github" title="github"></a>
+      <a href="#" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="https://phlamenco.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">phlamenco</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on Phlamenco&#39;s Blog Site</title>
+    <link>https://phlamenco.github.io/tags/algorithm/</link>
+    <description>Recent content in algorithm on Phlamenco&#39;s Blog Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Apr 2019 09:36:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://phlamenco.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>multiply_algorithm</title>
+      <link>https://phlamenco.github.io/post/multiply-algorithm/</link>
+      <pubDate>Mon, 15 Apr 2019 09:36:04 +0800</pubDate>
+      
+      <guid>https://phlamenco.github.io/post/multiply-algorithm/</guid>
+      <description>乘法是学习数学计算的基础，从小我们就从课本上学到了一种通用的乘法算法。但是那种乘法的复杂度太高。 下图是传统乘法和Karatsuba’s met</description>
+    </item>
+    
+  </channel>
+</rss>
